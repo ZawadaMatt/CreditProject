@@ -21,11 +21,13 @@ public class CreditDAO {
 
     @EventListener(ApplicationReadyEvent.class)
     public void CreditInit() {
-        String sql = "CREATE SCHEMA CreditDB CREATE TABLE Credit (CreditName varchar(255), ID int);";
+        String sql = "CREATE SCHEMA CreditDB;";
+        String sqlTable = "CREATE TABLE CreditDB.Credit (CreditName varchar(255), ID int);";
         jdbcTemplate.update(sql);
+        jdbcTemplate.update(sqlTable);
     }
 
-    public void addCredit(Credit credit) {
+    public void saveCredit(Credit credit) {
         String sql = "INSERT INTO Credit VALUES (?,?);";
         jdbcTemplate.update(sql, credit.getCreditName(), credit.getCreditID());
     }

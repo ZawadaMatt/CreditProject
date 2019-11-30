@@ -10,12 +10,13 @@ import javax.sql.DataSource;
 @Configuration
 public class JdbcConfig {
 
+
     @Bean
     public DataSource getDataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.url("localhost");
-        dataSourceBuilder.username("");
-        dataSourceBuilder.password("");
+        dataSourceBuilder.url("jdbc:mysql://remotemysql.com:3306/VrB0bHAdVS");
+        dataSourceBuilder.username("VrB0bHAdVS");
+        dataSourceBuilder.password("dvXbNXJsoX");
         dataSourceBuilder.driverClassName("com.mysql.jdbc.Driver");
         return dataSourceBuilder.build();
     }

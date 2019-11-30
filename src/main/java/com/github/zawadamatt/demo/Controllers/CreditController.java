@@ -45,9 +45,9 @@ public class CreditController {
         Credit credit = new Credit(creditName, nextIndex);
         Product product = new Product(nextIndex, productName, Integer.parseInt(productValue));
         Customer customer = new Customer(nextIndex, name, pesel, surname);
-        creditDAO.addCredit(credit);
-        productDAO.addProduct(product);
-        customerDAO.addCustomer(customer);
+        creditDAO.saveCredit(credit);
+        productDAO.saveProduct(product);
+        customerDAO.saveCustomer(customer);
         return "CreditList";
     }
 }
