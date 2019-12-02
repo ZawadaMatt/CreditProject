@@ -21,14 +21,14 @@ public class CustomerDAO {
 
     @EventListener(ApplicationReadyEvent.class)
     public void CustomerInit() {
-        String sql = "CREATE SCHEMA CustomerDB;";
-        String sqlTable = "CREATE TABLE CustomerDB.Customer (CreditID int , FirstName varchar(255), Pesel varchar(255), Surname varchar(255));";
+        String sql = "CREATE SCHEMA if not exists CustomerDB;";
+        String sqlTable = "CREATE TABLE if not exists CustomerDB.Customer (CreditID int , FirstName varchar(255), Pesel varchar(255), Surname varchar(255));";
         jdbcTemplate.update(sql);
         jdbcTemplate.update(sqlTable);
     }
 
     public void saveCustomer(Customer customer) {
-        String sql = "INSERT INTO Customer VALUES (?,?,?,?);";
+        String sql = "INSERT INTO CustomerDB.Customer VALUES (?,?,?,?);";
         jdbcTemplate.update(sql, customer.getCreditID(), customer.getFirstName(), customer.getPesel(), customer.getSurname());
     }
 

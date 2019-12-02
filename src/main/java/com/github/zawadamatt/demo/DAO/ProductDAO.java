@@ -22,14 +22,14 @@ public class ProductDAO {
 
     @EventListener(ApplicationReadyEvent.class)
     public void ProductInit() {
-        String sql = "CREATE SCHEMA ProductDB;";
-        String sqlTable = "CREATE TABLE ProductDB.Product (CreditID int, ProductName varchar(255), Value int);";
+        String sql = "CREATE SCHEMA if not exists ProductDB;";
+        String sqlTable = "CREATE TABLE if not exists ProductDB.Product (CreditID int, ProductName varchar(255), Value int);";
         jdbcTemplate.update(sql);
         jdbcTemplate.update(sqlTable);
     }
 
     public void saveProduct(Product product) {
-        String sql = "INSERT INTO Credit VALUES (?,?,?);";
+        String sql = "INSERT INTO ProductDB.Product VALUES (?,?,?);";
         jdbcTemplate.update(sql, product.getCreditID(), product.getProductName(), product.getValue());
     }
 

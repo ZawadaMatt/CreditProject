@@ -3,12 +3,12 @@ package com.github.zawadamatt.demo.domain;
 public class Credit {
 
     private String creditName;
-    private int creditID;
+    private int ID;
 
 
-    public Credit(String creditName, int creditID) {
+    public Credit(String creditName, int ID) {
         this.creditName = creditName;
-        this.creditID = creditID;
+        this.ID = ID;
     }
 
     public String getCreditName() {
@@ -19,11 +19,11 @@ public class Credit {
         this.creditName = creditName;
     }
 
-    public int getCreditID() {
-        return creditID;
+    public int getID() {
+        return ID;
     }
 
-    public void setCreditID(int creditID) {
-        this.creditID = creditID;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }

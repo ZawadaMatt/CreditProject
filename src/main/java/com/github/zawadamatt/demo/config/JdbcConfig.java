@@ -14,10 +14,9 @@ public class JdbcConfig {
     @Bean
     public DataSource getDataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.url("jdbc:mysql://remotemysql.com:3306/VrB0bHAdVS");
-        dataSourceBuilder.username("VrB0bHAdVS");
-        dataSourceBuilder.password("dvXbNXJsoX");
-        dataSourceBuilder.driverClassName("com.mysql.jdbc.Driver");
+        dataSourceBuilder.url("jdbc:mysql://127.0.0.1:3306?serverTimezone=UTC");
+        dataSourceBuilder.username("root");
+        dataSourceBuilder.password("qwerty");
         return dataSourceBuilder.build();
     }
 
