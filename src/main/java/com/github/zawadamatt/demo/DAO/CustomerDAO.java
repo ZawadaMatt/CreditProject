@@ -32,9 +32,9 @@ public class CustomerDAO {
         jdbcTemplate.update(sql, customer.getCreditID(), customer.getFirstName(), customer.getPesel(), customer.getSurname());
     }
 
-    public List<Customer> getCustomer() {
-        String sql = "SELECT * FROM Customer;";
-        List<Customer> customerList = jdbcTemplate.queryForList(sql, Customer.class);
+    public List<Customer> getCustomer() { //TODO
+        String sql = "SELECT * FROM CustomerDB.Customer;";
+        List<String> customerList = jdbcTemplate.queryForList(sql, String.class);
         return customerList;
     }
 
