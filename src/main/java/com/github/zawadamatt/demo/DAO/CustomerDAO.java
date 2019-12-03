@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class CustomerDAO {
@@ -32,10 +34,15 @@ public class CustomerDAO {
         jdbcTemplate.update(sql, customer.getCreditID(), customer.getFirstName(), customer.getPesel(), customer.getSurname());
     }
 
-    public List<Customer> getCustomer() { //TODO
+    public List<Customer> getCustomer() {
         String sql = "SELECT * FROM CustomerDB.Customer;";
-        List<String> customerList = jdbcTemplate.queryForList(sql, String.class);
-        return customerList;
+        List<Map<String, Object>> resultList = jdbcTemplate.queryForList(sql);
+        return resultList.stream()
+                .map(stringObjectMap ->
+                        new Customer((Integer) stringObjectMap.get("creditID"),
+                                String.valueOf(stringObjectMap.get("firstName")),
+                                String.valueOf(stringObjectMap.get("pesel")),
+                                String.valueOf(stringObjectMap.get("surname")))).collect(Collectors.toList());
     }
 
 }

@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class CreditDAO {
@@ -34,8 +36,11 @@ public class CreditDAO {
 
     public List<Credit> getCredit() {
         String sql = "SELECT * FROM CreditDB.Credit;";
-        List<Credit> creditList = jdbcTemplate.queryForList(sql, Credit.class);
-        return creditList;
+        List<Map<String, Object>> resultList = jdbcTemplate.queryForList(sql);
+        return resultList.stream()
+                .map(stringObjectMap ->
+                        new Credit(String.valueOf(stringObjectMap.get("CreditName")),
+                                (Integer) stringObjectMap.get("ID"))).collect(Collectors.toList());
     }
 
     public int lastIndex() {

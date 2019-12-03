@@ -1,6 +1,5 @@
 package com.github.zawadamatt.demo.DAO;
 
-import com.github.zawadamatt.demo.domain.Customer;
 import com.github.zawadamatt.demo.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -9,6 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class ProductDAO {
@@ -34,10 +35,13 @@ public class ProductDAO {
     }
 
     public List<Product> getProduct() {
-        String sql = "SELECT * FROM Product;";
-        List<Product> productList = jdbcTemplate.queryForList(sql, Product.class);
-        return productList;
+        String sql = "SELECT * FROM ProductDB.Product;";
+        List<Map<String, Object>> resultList = jdbcTemplate.queryForList(sql);
+        return resultList.stream()
+                .map(stringObjectMap ->
+                        new Product((Integer) stringObjectMap.get("creditID"),
+                                String.valueOf(stringObjectMap.get("productName")),
+                                (Integer) stringObjectMap.get("value"))).collect(Collectors.toList());
     }
-
 
 }
