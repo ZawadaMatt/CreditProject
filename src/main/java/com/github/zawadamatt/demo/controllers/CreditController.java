@@ -29,18 +29,18 @@ public class CreditController {
         this.creditViewDTO = creditViewDTO;
     }
 
-    @GetMapping("/add-credit")
+    @GetMapping("/CreateCredit")
     public String Credit() {
         return "Credit";
     }
 
-    @GetMapping("/get-credit")
+    @GetMapping("/GetCredit")
     public String getCredit(Model model) {
         model.addAttribute("listToView", creditViewDTO.viewToModel());
         return "CreditList";
     }
 
-    @PostMapping("/add-credit")
+    @PostMapping("/CreateCredit")
     public String addCredit(String name, String surname, String pesel, String productName, String productValue, String creditName) {
         int nextIndex = creditDAO.lastIndex() + 1;
         Credit credit = new Credit(creditName, nextIndex);
@@ -49,6 +49,6 @@ public class CreditController {
         creditDAO.saveCredit(credit);
         productDAO.saveProduct(product);
         customerDAO.saveCustomer(customer);
-        return "CreditList";
+        return "Credit";
     }
 }
