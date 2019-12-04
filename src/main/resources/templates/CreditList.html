@@ -6,16 +6,23 @@
 </head>
 <body>
 
-<table>
-
-    <th:block th:each="credit : ${creditList}">
-        <tr>
-            <td th:text="${customerList.get(credit.ID).getFirstName()}"></td>
-            <td th:text="${customerList.get(credit.getID()).getSurname()}"></td>
-            <td th:text="${customerList.get(credit.getID()).getPesel()}"></td>
-            <td th:text="${productList.get(credit.getID()).getProductName()}"></td>
-            <td th:text="${productList.get(credit.getID()).getValue()}"></td>
-            <td th:text="${credit.creditName}"></td>
+<table style="width:100%">
+    <tr>
+        <th>Imię Klienta</th>
+        <th>Nazwisko Klienta</th>
+        <th>Pesel</th>
+        <th>Nazwa produktu</th>
+        <th>Wartość produktu</th>
+        <th>Nazwa kredytu</th>
+    </tr>
+    <th:block th:each="list : ${listToView}">
+        <tr align="center">
+            <td th:text="${list.clientName}"></td>
+            <td th:text="${list.clientLastName}"></td>
+            <td th:text="${list.clientPesel}"></td>
+            <td th:text="${list.productName}"></td>
+            <td th:text="${list.productValue}"></td>
+            <td th:text="${list.creditName}"></td>
         </tr>
     </th:block>
 </table>

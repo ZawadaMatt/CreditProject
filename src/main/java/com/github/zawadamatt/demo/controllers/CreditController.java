@@ -1,11 +1,12 @@
-package com.github.zawadamatt.demo.Controllers;
+package com.github.zawadamatt.demo.controllers;
 
-import com.github.zawadamatt.demo.DAO.CreditDAO;
-import com.github.zawadamatt.demo.DAO.CustomerDAO;
-import com.github.zawadamatt.demo.DAO.ProductDAO;
+import com.github.zawadamatt.demo.dao.CreditDAO;
+import com.github.zawadamatt.demo.dao.CustomerDAO;
+import com.github.zawadamatt.demo.dao.ProductDAO;
 import com.github.zawadamatt.demo.domain.Credit;
 import com.github.zawadamatt.demo.domain.Customer;
 import com.github.zawadamatt.demo.domain.Product;
+import com.github.zawadamatt.demo.dto.CreditViewDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +19,14 @@ public class CreditController {
     private CreditDAO creditDAO;
     private ProductDAO productDAO;
     private CustomerDAO customerDAO;
+    private CreditViewDTO creditViewDTO;
 
     @Autowired
-    public CreditController(CreditDAO creditDAO, ProductDAO productDAO, CustomerDAO customerDAO) {
+    public CreditController(CreditDAO creditDAO, ProductDAO productDAO, CustomerDAO customerDAO, CreditViewDTO creditViewDTO) {
         this.creditDAO = creditDAO;
         this.productDAO = productDAO;
         this.customerDAO = customerDAO;
+        this.creditViewDTO = creditViewDTO;
     }
 
     @GetMapping("/add-credit")
@@ -33,9 +36,7 @@ public class CreditController {
 
     @GetMapping("/get-credit")
     public String getCredit(Model model) {
-        model.addAttribute("creditList", creditDAO.getCredit());
-        model.addAttribute("customerList", customerDAO.getCustomer());
-        model.addAttribute("productList", productDAO.getProduct());
+        model.addAttribute("listToView", creditViewDTO.viewToModel());
         return "CreditList";
     }
 

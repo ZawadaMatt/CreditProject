@@ -1,4 +1,4 @@
-package com.github.zawadamatt.demo.DAO;
+package com.github.zawadamatt.demo.dao;
 
 import com.github.zawadamatt.demo.domain.Credit;
 import org.springframework.beans.factory.annotation.Autowired;
